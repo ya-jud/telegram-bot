@@ -1,12 +1,12 @@
-from email import message
 import telebot
 from telebot import types
 
 import config
-import message_handler_text
 
 bot = telebot.TeleBot(config.TOKEN)
 chat_id = -1001797149316
+
+bot.send_message(chat_id, "Я ЖИВ")
 
 @bot.message_handler(commands=['my_info'])
 def get_user_info(message):
@@ -25,11 +25,11 @@ def return_info(call):
     #     markup.add(item_id)
     #     bot.send_message(call.message.chat.id, "Тыкай", reply_markup=markup)
     if call.data == "get_id":
-        bot.send_message(call.message.chat.id, f"Твой ID: { call.from_user.id }")
+        bot.send_message(call.from_user.id, f"Твой ID: { call.from_user.id }")
     elif call.data == "get_username":
-        bot.send_message(call.message.chat.id, f"Твой ник: { call.from_user.username }")
+        bot.send_message(call.from_user.id, f"Твой ник: { call.from_user.username }")
     elif call.data == "get_first_name":
-        bot.send_message(call.message.chat.id, f"Твоё имя: { call.from_user.first_name }")
+        bot.send_message(call.from_user.id, f"Твоё имя: { call.from_user.first_name }")
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
